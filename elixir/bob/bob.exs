@@ -1,4 +1,4 @@
-defmodule Domain do
+defmodule Remark do
   def rules do
     [{ &shout?/1    , "Whoa, chill out!" },
      { &question?/1 , "Sure."},
@@ -6,12 +6,12 @@ defmodule Domain do
      { &default/1   , "Whatever."}]
   end
 
-  defp shout?(p) do 
-    p == String.upcase(p) && 
-    p != String.downcase(p)
+  defp shout?(phrase) do 
+    phrase == String.upcase(phrase) && 
+    phrase != String.downcase(phrase)
   end
-  defp question?(p), do:  p |> String.ends_with? "?"
-  defp silence?(p), do: p |> String.strip |> String.length == 0
+  defp question?(phrase), do:  phrase |> String.ends_with? "?"
+  defp silence?(phrase), do: phrase |> String.strip |> String.length == 0
   defp default(_), do: true 
 end
 
@@ -21,6 +21,6 @@ defmodule Teenager do
   end
 
   def hey(input) do
-    input |> answer(Domain.rules)
+    input |> answer(Remark.rules)
   end
 end
