@@ -16,7 +16,11 @@ defmodule Domain do
 end
 
 defmodule Teenager do
+  defp answer(input, [{f,v}|t]) do
+    if f.(input), do: v, else: answer(input, t)
+  end
+
   def hey(input) do
-    Enum.reduce(Domain.rules, fn({f, v}, _) -> if f.(input), do: v end)
+    input |> answer(Domain.rules)
   end
 end
